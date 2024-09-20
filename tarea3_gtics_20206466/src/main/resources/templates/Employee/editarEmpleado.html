@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- Required meta tags -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Bootstrap CSS -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <title>Detalles del Empleado</title>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Editar empleado</h1>
+            <form class="mt-2" method="post" th:action="@{employee/save}">
+                <div class="form-group">
+                    <label for="firstName">Nombre:</label>
+                    <input type="text" class="form-control" id="firstName" th:value="${employee.firstName}" >
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Apellido:</label>
+                    <input type="text" class="form-control" id="lastName" th:value="${employee.lastName}" >
+                </div>
+
+                <div class="form-group">
+                    <label for="job">Puesto</label>
+                    <select class="form-control" id="job" name="job" required>
+                        <option th:each="job : ${listaJobs}"
+                                th:value="${job.jobId}"
+                                th:text="${job.jobTitle}"
+                                th:selected="${job.jobId==employee.job.jobId}">Seleccionar puesto</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="department">Departamento</label>
+                    <select class="form-control" id="department" name="department" required>
+                        <option th:each="department : ${listaDepartamentos}"
+                                th:value="${department.departmentId}"
+                                th:text="${department.departmentName}"
+                                th:selected="${department.departmentId==employee.department.departmentId}">Seleccionar departamento</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="salary">Salario:</label>
+                    <input type="text" class="form-control" id="salary" th:value="${employee.salary}">
+                </div>
+                <div class="form-group">
+                    <a th:href="@{'/employee/list'}" class="btn btn-danger">Cancelar</a>
+                    <button type="submit" class="btn btn-primary">Registrar</button>
+                </div>
+            </form>
+
+        </div>
+
+    </body>
+</html>
